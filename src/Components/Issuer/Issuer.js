@@ -12,6 +12,7 @@ const Issuer = () => {
     candidateName:"",
     collegeName:"",
     courseName:"",
+    address:"",
     expiryYear:"",
 })
 
@@ -28,9 +29,9 @@ const Issuer = () => {
   {
     try {
       
-      if(!data.idNumber|| !data.candidateName|| !data.collegeName || !data.courseName || !parseInt(data.expiryYear,10)) return alert("Please fill all the fileds")
+      if(!data.idNumber|| !data.candidateName|| !data.collegeName || !data.courseName ||!data.address, !parseInt(data.expiryYear,10)) return alert("Please fill all the fileds")
         const contract = await connectingWithContract();
-        const generateCertificate= await contract.generateCertificate(data.idNumber,data.candidateName,data.collegeName,data.courseName,parseInt(data.expiryYear,10));
+        const generateCertificate= await contract.generateCertificate(data.idNumber,data.candidateName,data.collegeName,data.courseName,data.address,parseInt(data.expiryYear,10));
         setLoading(true);
        await generateCertificate.wait();
         setLoading(false);
@@ -84,10 +85,12 @@ const Issuer = () => {
           </li>
           <li>
           <input
-              type="number"
-              name="issueYear"
+              type="text"
+              name="address"
+              value={data.address}
+              onChange={changeHandler}
               className="field-style field-split align-left"
-              placeholder="Issue Year"
+              placeholder="Candidate Wallet Address"
             />
           <input
               type="number"

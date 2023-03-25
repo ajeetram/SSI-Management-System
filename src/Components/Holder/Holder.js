@@ -6,17 +6,20 @@ const Holder = () => {
   const [name, setName] = useState("");
   const [college, setCollege] = useState("");
   const [course, setCourse] = useState("");
-  const [expiry, setExpiry] = useState(0);
+  const [expiry, setExpiry] = useState("");
   const [id, setId] = useState("");
+  const[add, setAdd] = useState("");
   const getCertificates = async () => {
     try {
       const contract = await connectingWithContract();
       const Data = await contract.getData(id);
-      console.log("your Data", Data[0]);
+      console.log("your Data", Data[4].toNumber());
       setName(Data[0]);
       setCollege(Data[1]);
       setCourse(Data[2]);
-      setExpiry(Data[3]);
+      setAdd(Data[3])
+      setExpiry(Data[4].toNumber())
+
     } catch (error) {
       alert("This Id is not register");
       window.location.reload();
@@ -46,28 +49,24 @@ const Holder = () => {
         </div>
       </div>
 
-      <div className="card">
-        <div class="id-card">
-          <div class="id-card__header">
-            <img src={Img} alt="student-photo"></img>
-            <h2 class="id-card__name">{name}</h2>
-          </div>
-          <div class="id-card__content">
-            <p>
-              <span>College Name:</span>
-              {college}
-            </p>
-            <p>
-              <span>Course Name:</span>
-              {course}
-            </p>
-            <p>
-              <span>Expiry Year:</span>
-              {expiry.toString()}
-            </p>
-          </div>
-        </div>
+      <div class="id-card-wrapper">
+  <div class="id-card">
+    <div class="profile-row">
+      <div class="dp">
+        <div class="dp-arc-outer"></div>
+        <div class="dp-arc-inner"></div>
+        <img src={Img} alt="profile"/>
       </div>
+      <div class="desc">
+        <h1>{name}</h1>
+            <p>College: {college}</p>
+            <p>Course: {course}</p>
+            <p>Address: {add.slice(0,10)}...</p>
+            <p>Expiry Year: {expiry}</p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   );
 };

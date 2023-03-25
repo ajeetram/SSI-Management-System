@@ -1,59 +1,100 @@
 
-   .card{
-    width: 80%;
-    margin: 10px auto;
+/* "https://fonts.googleapis.com/css?family=Orbitron" */
+.id-card-wrapper {
+  height: 60vh;
+  display: flex;
+}
+.id-card {
+  flex-basis: 100%;
+  max-width: 30em;
+  border: 1px solid rgb(97, 245, 245);
+  margin:  auto;
+  color: #fff;
+  padding: .5em;
+  background-color: #17445E;
+  box-shadow: 0px 0px 3px 1px #12a0a0, inset 0px 0px 3px 1px #12a0a0;
+  border-radius: 10px;
+}
 
-   }
-  
-  .id-card {
-    margin:10px auto ;
-    width: 300px;
-    height: 225px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+.profile-row {
+  display: flex;
+}
+.profile-row .dp {
+  flex-basis: 33.3%;
+  position: relative;
+  margin: 24px;
+  align-self: center;
+}
+.profile-row .desc {
+  flex-basis: 66.6%;
+}
+
+.profile-row .dp img {
+  max-width: 100%;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0px 0px 4px 3px #12a0a0;
+}
+.profile-row .desc {
+  padding: 1em;
+}
+
+.profile-row .dp .dp-arc-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 6px solid transparent;
+  border-top-color: #0AE0DF;
+  border-radius: 50%;
+  top: -6px;
+  left: -6px;
+
+  animation-duration: 2s;
+  animation-name: rotate-clock;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes rotate-clock {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .id-card__header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  to {
+    transform: rotate(360deg);
   }
-  
-  .id-card__header img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+}
+.profile-row .dp .dp-arc-outer {
+  position: absolute;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  border: 6px solid transparent;
+  border-bottom-color: #0AE0DF;
+  border-radius: 50%;
+  top: -16px;
+  left: -16px;
+
+  animation-duration: 2s;
+  animation-name: rotate-anticlock;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes rotate-anticlock {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .id-card__name {
-    font-size: 1.5rem;
-    margin: 0;
+  to {
+    transform: rotate(-360deg);
   }
-  
-  .id-card__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .id-card__content p {
-    margin: 0;
-    font-size: 1rem;
-  }
-  
-  .id-card__content span {
-    font-weight: bold;
-    margin-right: 5px;
-  }
-  
+}
+
+.profile-row .desc {
+  font-family: 'Orbitron', sans-serif;
+  color: #ecfcfb;
+  text-shadow: 0px 0px 4px #12a0a0;
+  letter-spacing: 1px;
+}
+.profile-row .desc h1 {
+  margin: 0px;
+}
   .getButton
   {
 
