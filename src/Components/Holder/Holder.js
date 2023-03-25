@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connectingWithContract } from "../Utils/apiFeatures";
 import "./holder.css";
 import Img from "../../assets/img1.gif";
+import { Loader } from "../Index";
 const Holder = () => {
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [college, setCollege] = useState("");
   const [course, setCourse] = useState("");
   const [expiry, setExpiry] = useState("");
   const [id, setId] = useState("");
-  const[add, setAdd] = useState("");
+  const [add, setAdd] = useState("");
+  const [to, setTo] = useState("");
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+
   const getCertificates = async () => {
     try {
       const contract = await connectingWithContract();
@@ -17,12 +23,36 @@ const Holder = () => {
       setName(Data[0]);
       setCollege(Data[1]);
       setCourse(Data[2]);
-      setAdd(Data[3])
-      setExpiry(Data[4].toNumber())
-
+      setAdd(Data[3]);
+      setExpiry(Data[4].toNumber());
     } catch (error) {
       alert("This Id is not register");
+    }
+  };
+
+  const shareCred = async () => {
+    try {
+      const contract = await connectingWithContract();
+      const share=await contract.allow(to);
+      setLoading(true);
+      await share.wait();
+      setLoading(false);
       window.location.reload();
+    } catch (error) {
+      alert("This Id is not register");
+    }
+  };
+  const unShareCred = async () => {
+    try {
+      const contract = await connectingWithContract();
+      const unshare =  await contract.disAllow(to);
+      setLoading(true);
+      await unshare.wait();
+      setLoading(false);
+      window.location.reload();
+      alert("Access provided to",to);
+    } catch (error) {
+      alert("This Id is not register");
     }
   };
 
@@ -50,23 +80,97 @@ const Holder = () => {
       </div>
 
       <div class="id-card-wrapper">
-  <div class="id-card">
-    <div class="profile-row">
-      <div class="dp">
-        <div class="dp-arc-outer"></div>
-        <div class="dp-arc-inner"></div>
-        <img src={Img} alt="profile"/>
+        <div class="id-card">
+          <div class="profile-row">
+            <div class="dp">
+              <div class="dp-arc-outer"></div>
+              <div class="dp-arc-inner"></div>
+              <img src={Img} alt="profile" />
+            </div>
+            <div class="desc">
+              <h1>{name}</h1>
+              <p>College: {college}</p>
+              <p>Course: {course}</p>
+              <p>Address: {add.slice(0, 10)}...</p>
+              <p>Expiry Year: {expiry}</p>
+            </div>
+            <div className="allowBtn">
+              <button onClick={() => setShow1(true)}>Share</button>
+              {show1 ? (
+                <>
+                  <div className="modal">
+                    <div className="overlay"></div>
+                    <div className="modal-content">
+                      <button
+                        className="close-modal"
+                        onClick={() => setShow1(false)}
+                      >
+                        CLOSE
+                      </button>
+                      <div className="addBox">
+                        <div className="addinpput">
+                          <input
+                            type="text"
+                            placeholder="Enter Address"
+                            value={to}
+                            onChange={(e) => setTo(e.target.value)}
+                          ></input>
+                        </div>
+                        <div>
+                        {
+                          loading===true?<Loader />:
+                          <button
+                            className="shareBtn"
+                            onClick={() => shareCred()}
+                          >
+                            SHARE
+                          </button>
+                        }
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : null}
+              <button onClick={() => setShow2(true)}>Unshare</button>
+              {show2 ? (
+                <>
+                  <div className="modal">
+                    <div className="overlay"></div>
+                    <div className="modal-content">
+                      <button
+                        className="close-modal"
+                        onClick={() => setShow2(false)}
+                      >
+                        CLOSE
+                      </button>
+                      <div className="addBox">
+                        <div className="addinpput">
+                          <input
+                            type="text"
+                            placeholder="Enter Address"
+                          ></input>
+                        </div>
+                        <div>
+                        {
+                          loading===true?<Loader />:
+                          <button
+                            className="shareBtn"
+                            onClick={() => unShareCred()}
+                          >
+                            UNSHARE
+                          </button>
+                        }
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : null}
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="desc">
-        <h1>{name}</h1>
-            <p>College: {college}</p>
-            <p>Course: {course}</p>
-            <p>Address: {add.slice(0,10)}...</p>
-            <p>Expiry Year: {expiry}</p>
-      </div>
-    </div>
-  </div>
-</div>
     </div>
   );
 };

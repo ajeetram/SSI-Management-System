@@ -92,4 +92,9 @@ contract SSI {
     {
         return accessList[msg.sender];
     }
+
+    function verify() public pure returns(bool)
+    {
+        return true;
+    }
 }

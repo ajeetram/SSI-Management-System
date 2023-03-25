@@ -6,7 +6,7 @@
 }
 .id-card {
   flex-basis: 100%;
-  max-width: 30em;
+  max-width:40em;
   border: 1px solid rgb(97, 245, 245);
   margin:  auto;
   color: #fff;
@@ -115,7 +115,8 @@
   .idInput
   {
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
+    border: chocolate;
   }
 
   .grid-container-element { 
@@ -130,4 +131,83 @@
     margin: 10px auto; 
     
     
+}
+
+.allowBtn
+{
+  display:flex;
+  gap: 10px;
+}
+
+.allowBtn button {
+  margin-bottom: 95%;
+  padding: 10px 30px;
+  border-radius: 5px;
+  border:white;
+  background-color: #216288;
+  color: aquamarine;
+  cursor: pointer;
+
+}
+.allowBtn button:hover {
+  background-color: #17445E;
+}
+
+
+
+/* /------------------Model------------------/ */
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  padding: 10px 20px;
+  display: block;
+  margin: 100px auto 0;
+  font-size: 18px;
+}
+
+.modal, .overlay {
+  width: 100vw;
+  height: 150vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49,49,49,0.8);
+}
+.modal-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #f1f1f1;
+  padding: 10px 28px;
+  border-radius: 3px;
+  
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+}
+
+.addBox
+{
+  display: grid;
+  margin: 60px auto;
+  gap: 20px;
+  
+}
+
+.addBox input{
+  padding: 15px;
+  width: 80%;
+  border-radius: 10px;
 }

@@ -1,51 +1,57 @@
-import React, { useContext, useState } from "react";
-import {
-  connectingWithContract } from '../Utils/apiFeatures'
+import React, {useState } from "react";
+import { connectingWithContract } from "../Utils/apiFeatures";
 import "./issuer.css";
-import { SSIAppContexts } from "../Context/SSIContext";
 import { Loader } from "../Index";
 const Issuer = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [data, setData] = useState({
-    idNumber:"",
-    candidateName:"",
-    collegeName:"",
-    courseName:"",
-    address:"",
-    expiryYear:"",
-})
+    idNumber: "",
+    candidateName: "",
+    collegeName: "",
+    courseName: "",
+    address: "",
+    expiryYear: "",
+  });
 
-  const changeHandler=(e)=>
-  {
+  const changeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setData({...data,[name]:value})
-  }
-  console.log("Named",data.candidateName)
-  console.log(parseInt(data.expiryYear,10)+2)
-
-  const IssueCertificate = async()=>
-  {
+    setData({ ...data, [name]: value });
+  };
+  
+  const IssueCertificate = async () => {
     try {
-      
-      if(!data.idNumber|| !data.candidateName|| !data.collegeName || !data.courseName ||!data.address, !parseInt(data.expiryYear,10)) return alert("Please fill all the fileds")
-        const contract = await connectingWithContract();
-        const generateCertificate= await contract.generateCertificate(data.idNumber,data.candidateName,data.collegeName,data.courseName,data.address,parseInt(data.expiryYear,10));
-        setLoading(true);
-       await generateCertificate.wait();
-        setLoading(false);
-        window.location.reload();
+      if (
+        (!data.idNumber ||
+          !data.candidateName ||
+          !data.collegeName ||
+          !data.courseName ||
+          !data.address,
+        !parseInt(data.expiryYear, 10))
+      )
+        return alert("Please fill all the fileds");
+      const contract = await connectingWithContract();
+      const generateCertificate = await contract.generateCertificate(
+        data.idNumber,
+        data.candidateName,
+        data.collegeName,
+        data.courseName,
+        data.address,
+        parseInt(data.expiryYear, 10)
+      );
+      setLoading(true);
+      await generateCertificate.wait();
+      setLoading(false);
+      window.location.reload();
     } catch (error) {
-      setError("Please filled all the filled")
-      
+      alert("Please fill all the fields");
     }
-  }
+  };
 
   return (
     <div>
       <div className="form-style-9">
-      <h1>Issue Credentials</h1>
+        <h1>Issue Credentials</h1>
         <ul>
           <li>
             <input
@@ -84,7 +90,7 @@ const Issuer = () => {
             />
           </li>
           <li>
-          <input
+            <input
               type="text"
               name="address"
               value={data.address}
@@ -92,7 +98,7 @@ const Issuer = () => {
               className="field-style field-split align-left"
               placeholder="Candidate Wallet Address"
             />
-          <input
+            <input
               type="number"
               name="expiryYear"
               value={data.expiryYear}
@@ -101,13 +107,18 @@ const Issuer = () => {
               placeholder="Expiry Year"
             />
           </li>
-
         </ul>
-        {
-          loading===true?<Loader />:
-        
-        <button type="submit" className="button" onClick={()=>IssueCertificate()}>Issue</button>
-        }
+        {loading === true ? (
+          <Loader />
+        ) : (
+          <button
+            type="submit"
+            className="button"
+            onClick={() => IssueCertificate()}
+          >
+            Issue
+          </button>
+        )}
       </div>
     </div>
   );
