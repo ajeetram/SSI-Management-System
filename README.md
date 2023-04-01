@@ -1,3 +1,31 @@
+# Consent-Based Data Management System
+Consent-based applications are becoming increasingly important in today's digital world, where
+users share a lot of personal information and data with different applications and platforms. With
+the rise of privacy concerns and data breaches, consent-based applications are necessary to
+ensure that users are in control of their data and that their privacy is protected.
+
+So, to overcome the above problems, I have built a consent-based-application using Ethereum
+Blockchain Technology. In this application there are three different entities-Issuer,Holder and
+Verifier.
+
+Issuers can issue the credentials of the holder with a unique wallet address of the holder and Id
+number. Holders can see their credentials just by entering the Id number. Holders also can share
+and unshare their credentials to any third party. Third parties can see the credentials of the
+holders when access is provided by holders, just by entering the Id number of the holder’s
+credentials.
+<h5>Tech Stack :<h5> 
+<li>Solidity
+<li>Hardhat
+<li>React-js
+<li>Ether-js
+<li>Web3Modal
+<li>MetaMask
+<li>Goerli TestNet
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
