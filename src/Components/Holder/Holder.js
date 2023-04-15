@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { connectingWithContract } from "../Utils/apiFeatures";
+import React, { useContext, useState } from "react";
+import {connectingWithContract } from "../Utils/apiFeatures";
+import { SSIAppContexts } from "../Context/SSIContext";
 import "./holder.css";
 import Img from "../../assets/img1.gif";
-import { Loader } from "../Index";
+import { AccountList, Loader } from "../Index";
 const Holder = () => {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
@@ -14,6 +15,8 @@ const Holder = () => {
   const [to, setTo] = useState("");
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
+
+  const {account} = useContext(SSIAppContexts)
 
   const getCertificates = async () => {
     try {
@@ -32,25 +35,28 @@ const Holder = () => {
 
   const shareCred = async () => {
     try {
+      
       const contract = await connectingWithContract();
       const share=await contract.allow(to);
       setLoading(true);
       await share.wait();
       setLoading(false);
       window.location.reload();
+      alert("Access provided");
     } catch (error) {
       alert("This Id is not register");
     }
   };
   const unShareCred = async () => {
     try {
+      console.log("Hello");
       const contract = await connectingWithContract();
-      const unshare =  await contract.disAllow(to);
+      const unshare =  await contract?.disAllow(to);
       setLoading(true);
       await unshare.wait();
       setLoading(false);
       window.location.reload();
-      alert("Access provided to",to);
+      alert("Access revoked",);
     } catch (error) {
       alert("This Id is not register");
     }
@@ -123,7 +129,7 @@ const Holder = () => {
                             className="shareBtn"
                             onClick={() => shareCred()}
                           >
-                            SHARE
+                            Share Access
                           </button>
                         }
                         </div>
@@ -132,7 +138,7 @@ const Holder = () => {
                   </div>
                 </>
               ) : null}
-              <button onClick={() => setShow2(true)}>Unshare</button>
+              <button onClick={() => setShow2(true)}>Revoke</button>
               {show2 ? (
                 <>
                   <div className="modal">
@@ -149,6 +155,8 @@ const Holder = () => {
                           <input
                             type="text"
                             placeholder="Enter Address"
+                            value={to}
+                            onChange={(e) => setTo(e.target.value)}
                           ></input>
                         </div>
                         <div>
@@ -158,7 +166,7 @@ const Holder = () => {
                             className="shareBtn"
                             onClick={() => unShareCred()}
                           >
-                            UNSHARE
+                            Revoke Access
                           </button>
                         }
                         </div>
@@ -171,6 +179,7 @@ const Holder = () => {
           </div>
         </div>
       </div>
+      {/* <AccountList /> */}
     </div>
   );
 };
