@@ -1,10 +1,10 @@
-# Consent-Based Data Management System
-Consent-based applications are becoming increasingly important in today's digital world, where
+# Self-Sovereign-Identity-Management-System
+Self-Sovereign-Identity-Management-System are becoming increasingly important in today's digital world, where
 users share a lot of personal information and data with different applications and platforms. With
-the rise of privacy concerns and data breaches, consent-based applications are necessary to
+the rise of privacy concerns and data breaches, Self-Sovereign-Identity-Management-System are necessary to
 ensure that users are in control of their data and that their privacy is protected.
 
-So, to overcome the above problems, I have built a consent-based-application using Ethereum
+So, to overcome the above problems, I have built a Self-Sovereign-Identity-Management-System using Ethereum
 Blockchain Technology. In this application there are three different entities-Issuer,Holder and
 Verifier.
 
@@ -23,7 +23,7 @@ credentials.
 <li>Goerli TestNet
 
 # Screenshots
-  ![image](https://user-images.githubusercontent.com/86039147/229305253-274b9f03-62fc-4d10-a7bb-d7e40e01175b.png)
+ ![image](https://user-images.githubusercontent.com/86039147/232225704-799dc01b-da1f-45fd-99ad-18e7e396068a.png)
 ![image](https://user-images.githubusercontent.com/86039147/229305459-8859e086-36cd-48a1-8bc2-6f9228639426.png)
 ![image](https://user-images.githubusercontent.com/86039147/229305537-838cdcf6-a3af-47c2-8cb8-e4ae0fc7f134.png)
 ![image](https://user-images.githubusercontent.com/86039147/229305605-aece9ea7-759d-450b-b5e3-bc1f6f7cafce.png)
